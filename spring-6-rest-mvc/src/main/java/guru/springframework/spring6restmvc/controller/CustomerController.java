@@ -17,14 +17,14 @@ import java.util.UUID;
 public class CustomerController {
 
     private final CustomerService customerService;
-
+    
     @PostMapping
     public ResponseEntity handleCustomerPost(@RequestBody Customer customer){
 
         Customer savedCustomer = customerService.saveNewCustomer(customer);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Location", savedCustomer.getId().toString());
+        headers.add("Location", "/api/v1/customer/" + savedCustomer.getId().toString());
 
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }
